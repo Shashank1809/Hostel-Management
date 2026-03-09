@@ -1,0 +1,32 @@
+﻿@model HostelManagement.Models.Room
+@{
+    ViewBag.Title = "Confirm Booking";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm border-success">
+                <div class="card-header bg-success text-white text-center">
+                    <h4 class="mb-0">🛏️ Confirm Your Booking</h4>
+                </div>
+                <div class="card-body p-4 text-center">
+                    <h5 class="fw-bold mb-3">You are about to book:</h5>
+
+                    <div class="p-3 bg-light rounded mb-4 text-start border">
+                        <p class="mb-2"><strong>Room Type:</strong> @Model.RoomType</p>
+                        <p class="mb-2"><strong>Description:</strong> @Model.Description</p>
+                        <p class="mb-0 text-success fs-5"><strong>Monthly Rent:</strong> $@Model.MonthlyRent</p>
+                    </div>
+
+                    <p class="text-muted small mb-4">By clicking confirm, this room will be marked as occupied and assigned to your account. Your first month's rent will be due immediately.</p>
+
+                    <form action="@Url.Action("Book", "Room", new { id = Model.RoomId })" method="post">
+                        <a href="@Url.Action("Index", "Room")" class="btn btn-outline-secondary px-4 me-2">Cancel</a>
+                        <button type="submit" class="btn btn-success px-4">Confirm & Book</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,94 @@
+﻿@*@{ ViewBag.Title = "Student Dashboard"; }
+
+    <h2>Welcome, @Session["Username"]</h2>
+
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <div class="card p-4 shadow-sm">
+                <h4>Room Booking</h4>
+                <p>Browse available rooms and book your accommodation.</p>
+                <a href="@Url.Action("Index", "Room")" class="btn btn-primary">View Rooms</a>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card p-4 shadow-sm">
+                <h4>Rent Management</h4>
+                <p>View your monthly mess bill and room rent payments.</p>
+                <button class="btn btn-success">Pay Rent</button>
+            </div>
+        </div>
+    </div>*@
+
+@{
+    ViewBag.Title = "Student Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="p-4 bg-white border border-success border-opacity-25 rounded shadow-sm d-flex justify-content-between align-items-center">
+                <div>
+                    <h2 class="mb-1 text-success">Student Portal</h2>
+                    <p class="mb-0 text-muted">Welcome, @Session["Username"]. Have a great day!</p>
+                </div>
+                <div class="d-none d-sm-block">
+                    <img src="https://via.placeholder.com/60/4CAF50/FFFFFF?text=St" class="rounded-circle shadow-sm" alt="Student Profile" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-md-8">
+            <div class="row g-4">
+                <div class="col-sm-6">
+                    <div class="card h-100 shadow-sm border-0">
+                        <div class="card-body text-center p-4">
+                            <h3 class="mb-3">🏨</h3>
+                            <h5 class="fw-bold">Book a Room</h5>
+                            <p class="text-muted small">View available hostel rooms, check capacities, and reserve your spot.</p>
+                            <a href="@Url.Action("Index", "Room")" class="btn btn-success mt-2 px-4">Browse Rooms</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="card h-100 shadow-sm border-0">
+                        <div class="card-body text-center p-4">
+                            <h3 class="mb-3">💳</h3>
+                            <h5 class="fw-bold">My Rent & Mess</h5>
+                            <p class="text-muted small">Check your monthly dues, mess bill calculations, and pay online.</p>
+                            <button class="btn btn-warning mt-2 px-4 text-dark">View Dues</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0 mb-4 h-100">
+                <div class="card-header bg-success text-white fw-bold">
+                    My Current Status
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex justify-content-between align-items-center py-3">
+                        Room Allocation
+                        <span class="badge bg-secondary rounded-pill">Not Assigned</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center py-3">
+                        Rent Status
+                        <span class="badge bg-success rounded-pill">Cleared</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center py-3">
+                        Mess Status
+                        <span class="badge bg-success rounded-pill">Active</span>
+                    </li>
+                </ul>
+                <div class="card-body bg-light text-center">
+                    <small class="text-muted">Need help? Contact the Hostel Admin.</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

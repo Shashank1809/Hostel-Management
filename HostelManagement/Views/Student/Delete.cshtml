@@ -1,0 +1,124 @@
+﻿@*@model HostelManagement.Models.User
+    @{
+        ViewBag.Title = "Delete Student";
+    }
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6 text-center">
+                <div class="card shadow border-danger">
+                    <div class="card-body p-5">
+                        <h1 class="display-4 text-danger mb-3">⚠️</h1>
+                        <h3 class="fw-bold">Delete Student?</h3>
+                        <p class="text-muted">Are you sure you want to permanently remove <strong>@Model.FirstName @Model.LastName</strong> (@Model.Username)? This action cannot be undone.</p>
+
+                        <form action="@Url.Action("Delete", "Student", new { id = Model.UserId })" method="post" class="mt-4">
+                            <a href="@Url.Action("Index", "Student")" class="btn btn-secondary px-4 me-2">Cancel</a>
+                            <button type="submit" class="btn btn-danger px-4">Yes, Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>*@
+
+@{
+    ViewBag.Title = "Admin Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="p-4 bg-success text-white rounded shadow-sm d-flex justify-content-between align-items-center">
+                <div>
+                    <h2 class="mb-1">Admin Dashboard</h2>
+                    <p class="mb-0">Welcome back, @Session["Username"]. Here is your hostel overview.</p>
+                </div>
+                <div class="text-end d-none d-md-block">
+                    <span class="badge bg-light text-success fs-6 px-3 py-2">System Status: Active</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm border-start border-success border-4 h-100">
+                <div class="card-body">
+                    <h6 class="text-muted text-uppercase mb-2">Total Rooms</h6>
+                    <h3 class="mb-0 text-success">42</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm border-start border-primary border-4 h-100">
+                <div class="card-body">
+                    <h6 class="text-muted text-uppercase mb-2">Registered Students</h6>
+                    <h3 class="mb-0 text-primary">128</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm border-start border-warning border-4 h-100">
+                <div class="card-body">
+                    <h6 class="text-muted text-uppercase mb-2">Pending Rent</h6>
+                    <h3 class="mb-0 text-warning">15</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm text-center">
+                <div class="card-header bg-transparent border-0 pt-4">
+                    <div class="bg-success text-white rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
+                        <span class="fs-3">🛏️</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title fw-bold">Type of Rooms</h5>
+                    <p class="text-muted">Manage hostel room types, update details, or delete unavailable rooms.</p>
+                </div>
+                <div class="card-footer bg-transparent border-0 pb-4">
+                    <a href="@Url.Action("Index", "Room")" class="btn btn-outline-success w-100">Manage Rooms</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm text-center">
+                <div class="card-header bg-transparent border-0 pt-4">
+                    <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
+                        <span class="fs-3">👨‍🎓</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title fw-bold">Students Management</h5>
+                    <p class="text-muted">View student profiles, manage admissions, and update records.</p>
+                </div>
+                <div class="card-footer bg-transparent border-0 pb-4">
+                    <a href="@Url.Action("Index", "Student")" class="btn btn-outline-primary w-100">Manage Students</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm text-center">
+                <div class="card-header bg-transparent border-0 pt-4">
+                    <div class="bg-warning text-dark rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
+                        <span class="fs-3">💰</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title fw-bold">Rent Management</h5>
+                    <p class="text-muted">Track monthly rent, mess bills, and monitor payment statuses.</p>
+                </div>
+                <div class="card-footer bg-transparent border-0 pb-4">
+                    <button class="btn btn-outline-warning text-dark w-100">Manage Rent</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

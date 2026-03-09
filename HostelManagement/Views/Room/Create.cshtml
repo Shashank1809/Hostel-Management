@@ -1,0 +1,47 @@
+﻿@model HostelManagement.Models.Room
+@{
+    ViewBag.Title = "Add New Room";
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm border-success">
+                <div class="card-header bg-success text-white">
+                    <h4 class="mb-0">🛏️ Add New Room Type</h4>
+                </div>
+                <div class="card-body p-4">
+                    <form action="@Url.Action("Create", "Room")" method="post">
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Room Type</label>
+                            <input type="text" name="RoomType" class="form-control" placeholder="e.g. Single AC, Double Non-AC, Dormitory" required />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Description</label>
+                            <textarea name="Description" class="form-control" rows="3" placeholder="Describe the amenities included..."></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Monthly Rent ($)</label>
+                            <input type="number" name="MonthlyRent" step="0.01" class="form-control" placeholder="0.00" required />
+                        </div>
+
+                        <div class="form-check form-switch mb-4">
+                            <input class="form-check-input" type="checkbox" name="IsAvailable" value="true" checked id="availCheck">
+                            <label class="form-check-label fw-bold text-success" for="availCheck">
+                                Room is currently available for booking
+                            </label>
+                        </div>
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a href="@Url.Action("Index", "Room")" class="btn btn-outline-secondary me-md-2">Cancel</a>
+                            <button type="submit" class="btn btn-success px-4">Save Room</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,28 @@
+﻿@model HostelManagement.Models.Room
+@{
+    ViewBag.Title = "Delete Room";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 text-center">
+            <div class="card shadow border-danger">
+                <div class="card-body p-5">
+                    <h1 class="display-4 text-danger mb-3">⚠️</h1>
+                    <h3 class="fw-bold">Delete This Room?</h3>
+                    <p class="text-muted mb-4">Are you sure you want to permanently remove the <strong>@Model.RoomType</strong> room from the database? This action cannot be undone.</p>
+
+                    <div class="card bg-light mb-4 text-start p-3 border-0">
+                        <p class="mb-1"><strong>Rent:</strong> $@Model.MonthlyRent / month</p>
+                        <p class="mb-0"><strong>Status:</strong> @(Model.IsAvailable ? "Available" : "Occupied")</p>
+                    </div>
+
+                    <form action="@Url.Action("Delete", "Room", new { id = Model.RoomId })" method="post">
+                        <a href="@Url.Action("Index", "Room")" class="btn btn-secondary px-4 me-2">Cancel</a>
+                        <button type="submit" class="btn btn-danger px-4">Yes, Delete Room</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

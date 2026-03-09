@@ -1,0 +1,48 @@
+﻿@model IEnumerable<HostelManagement.Models.User>
+@{
+    ViewBag.Title = "Manage Students";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>👨‍🎓 Students Management</h2>
+    <a href="@Url.Action("Register", "Account")" class="btn btn-success shadow-sm">+ Add New Student</a>
+</div>
+
+<div class="card shadow-sm">
+    <div class="card-body p-0">
+        <table class="table table-striped table-hover align-middle mb-0">
+            <thead class="table-dark">
+                <tr>
+                    <th class="ps-3">Full Name</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Any())
+                {
+                    foreach (var student in Model)
+                    {
+                        <tr>
+                            <td class="ps-3 fw-bold">@student.FirstName @student.LastName</td>
+                            <td>@student.Username</td>
+                            <td>@student.Email</td>
+                            <td class="text-center">
+                                <a href="@Url.Action("Edit", "Student", new { id = student.UserId })" class="btn btn-sm btn-primary px-3 me-1">Edit</a>
+                                @*<a href="@Url.Action("Delete", "Student", new { id = student.UserId })" class="btn btn-sm btn-danger px-3">Delete</a>*@
+                                <a href="/Student/Delete/@student.UserId" class="btn btn-sm btn-danger px-3">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="4" class="text-center text-muted py-4">No students are currently registered.</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
