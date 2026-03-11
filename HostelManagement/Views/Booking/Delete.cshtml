@@ -1,0 +1,28 @@
+﻿@model HostelManagement.Models.Booking
+@{
+    ViewBag.Title = "Remove Booking";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 text-center">
+            <div class="card shadow border-danger">
+                <div class="card-body p-5">
+                    <h1 class="display-4 text-danger mb-3">⚠️</h1>
+                    <h3 class="fw-bold">Remove this Student?</h3>
+                    <p class="text-muted mb-4">Are you sure you want to cancel this booking? This will remove the student from the room and <strong>immediately make the room available for others to book.</strong></p>
+
+                    <div class="card bg-light mb-4 text-start p-3 border-0">
+                        <p class="mb-1"><strong>Student:</strong> @(Model.User != null ? Model.User.FirstName + " " + Model.User.LastName : "ID " + Model.UserId)</p>
+                        <p class="mb-0"><strong>Room:</strong> @(Model.Room != null ? Model.Room.RoomType : "ID " + Model.RoomId)</p>
+                    </div>
+
+                    <form action="@Url.Action("Delete", "Booking", new { id = Model.BookingId })" method="post">
+                        <a href="@Url.Action("Index", "Booking")" class="btn btn-secondary px-4 me-2">Cancel</a>
+                        <button type="submit" class="btn btn-danger px-4">Yes, Remove Booking</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

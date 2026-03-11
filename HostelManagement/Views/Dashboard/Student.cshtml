@@ -1,24 +1,80 @@
-﻿@*@{ ViewBag.Title = "Student Dashboard"; }
+﻿@*@{
+        ViewBag.Title = "Student Dashboard";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
 
-    <h2>Welcome, @Session["Username"]</h2>
-
-    <div class="row mt-4">
-        <div class="col-md-6">
-            <div class="card p-4 shadow-sm">
-                <h4>Room Booking</h4>
-                <p>Browse available rooms and book your accommodation.</p>
-                <a href="@Url.Action("Index", "Room")" class="btn btn-primary">View Rooms</a>
+    <div class="container mt-4">
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="p-4 bg-white border border-success border-opacity-25 rounded shadow-sm d-flex justify-content-between align-items-center">
+                    <div>
+                        <h2 class="mb-1 text-success">Student Portal</h2>
+                        <p class="mb-0 text-muted">Welcome, @Session["Username"]. Have a great day!</p>
+                    </div>
+                    <div class="d-none d-sm-block">
+                        <img src="https://via.placeholder.com/60/4CAF50/FFFFFF?text=St" class="rounded-circle shadow-sm" alt="Student Profile" />
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="col-md-6">
-            <div class="card p-4 shadow-sm">
-                <h4>Rent Management</h4>
-                <p>View your monthly mess bill and room rent payments.</p>
-                <button class="btn btn-success">Pay Rent</button>
+
+        <div class="row g-4">
+            <div class="col-md-8">
+                <div class="row g-4">
+                    <div class="col-sm-6">
+                        <div class="card h-100 shadow-sm border-0">
+                            <div class="card-body text-center p-4">
+                                <h3 class="mb-3">🏨</h3>
+                                <h5 class="fw-bold">Book a Room</h5>
+                                <p class="text-muted small">View available hostel rooms, check capacities, and reserve your spot.</p>
+                                <a href="@Url.Action("Index", "Room")" class="btn btn-success mt-2 px-4">Browse Rooms</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="card h-100 shadow-sm border-0">
+                            <div class="card-body text-center p-4">
+                                <h3 class="mb-3">💳</h3>
+                                <h5 class="fw-bold">My Rent & Mess</h5>
+                                <p class="text-muted small">Check your monthly dues, mess bill calculations, and pay online.</p>
+                                <button class="btn btn-warning mt-2 px-4 text-dark">View Dues</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card shadow-sm border-0 mb-4 h-100">
+                    <div class="card-header bg-success text-white fw-bold">
+                        My Current Status
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex justify-content-between align-items-center py-3">
+                            Room Allocation
+                            <span class="badge bg-secondary rounded-pill">Not Assigned</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center py-3">
+                            Rent Status
+                            <span class="badge bg-success rounded-pill">Cleared</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center py-3">
+                            Mess Status
+                            <span class="badge bg-success rounded-pill">Active</span>
+                        </li>
+                    </ul>
+                    <div class="card-body bg-light text-center">
+                        <small class="text-muted">Need help? Contact the Hostel Admin.</small>
+                    </div>
+                </div>
             </div>
         </div>
     </div>*@
 
+
+
+@model IEnumerable<HostelManagement.Models.Booking>
 @{
     ViewBag.Title = "Student Dashboard";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -27,66 +83,79 @@
 <div class="container mt-4">
     <div class="row mb-4">
         <div class="col-12">
-            <div class="p-4 bg-white border border-success border-opacity-25 rounded shadow-sm d-flex justify-content-between align-items-center">
+            <div class="p-4 bg-primary text-white rounded shadow-sm d-flex justify-content-between align-items-center">
                 <div>
-                    <h2 class="mb-1 text-success">Student Portal</h2>
-                    <p class="mb-0 text-muted">Welcome, @Session["Username"]. Have a great day!</p>
+                    <h2 class="mb-1">Student Dashboard</h2>
+                    <p class="mb-0">Welcome back, @Session["Username"]. Here is your active housing information.</p>
                 </div>
-                <div class="d-none d-sm-block">
-                    <img src="https://via.placeholder.com/60/4CAF50/FFFFFF?text=St" class="rounded-circle shadow-sm" alt="Student Profile" />
+                <div class="text-end d-none d-md-block">
+                    <span class="fs-1">🎓</span>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="row g-4">
-        <div class="col-md-8">
-            <div class="row g-4">
-                <div class="col-sm-6">
-                    <div class="card h-100 shadow-sm border-0">
-                        <div class="card-body text-center p-4">
-                            <h3 class="mb-3">🏨</h3>
-                            <h5 class="fw-bold">Book a Room</h5>
-                            <p class="text-muted small">View available hostel rooms, check capacities, and reserve your spot.</p>
-                            <a href="@Url.Action("Index", "Room")" class="btn btn-success mt-2 px-4">Browse Rooms</a>
-                        </div>
-                    </div>
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card shadow-sm border-0 border-top border-primary border-4">
+                <div class="card-header bg-white border-bottom pt-3 pb-3">
+                    <h5 class="mb-0 fw-bold">My Booked Rooms</h5>
                 </div>
-
-                <div class="col-sm-6">
-                    <div class="card h-100 shadow-sm border-0">
-                        <div class="card-body text-center p-4">
-                            <h3 class="mb-3">💳</h3>
-                            <h5 class="fw-bold">My Rent & Mess</h5>
-                            <p class="text-muted small">Check your monthly dues, mess bill calculations, and pay online.</p>
-                            <button class="btn btn-warning mt-2 px-4 text-dark">View Dues</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="card shadow-sm border-0 mb-4 h-100">
-                <div class="card-header bg-success text-white fw-bold">
-                    My Current Status
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item d-flex justify-content-between align-items-center py-3">
-                        Room Allocation
-                        <span class="badge bg-secondary rounded-pill">Not Assigned</span>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center py-3">
-                        Rent Status
-                        <span class="badge bg-success rounded-pill">Cleared</span>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center py-3">
-                        Mess Status
-                        <span class="badge bg-success rounded-pill">Active</span>
-                    </li>
-                </ul>
-                <div class="card-body bg-light text-center">
-                    <small class="text-muted">Need help? Contact the Hostel Admin.</small>
+                <div class="card-body p-0">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th class="ps-4 py-3">Room Details</th>
+                                <th>Monthly Rent</th>
+                                <th>Booking Date</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null && Model.Any())
+                            {
+                                foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td class="ps-4 py-3">
+                                            @if (item.Room != null)
+                                            {
+                                                <strong class="text-dark">@item.Room.RoomType</strong><br />
+                                                <small class="text-muted">@item.Room.Description</small>
+                                            }
+                                            else
+                                            {
+                                                <span>Room ID: @item.RoomId</span>
+                                            }
+                                        </td>
+                                        <td class="text-success fw-bold">
+                                            $@(item.Room != null ? item.Room.MonthlyRent.ToString("0.00") : "N/A")
+                                        </td>
+                                        <td>@item.BookingDate.ToString("MMM dd, yyyy")</td>
+                                        <td>
+                                            @if (item.Status == "Active")
+                                            {
+                                                <span class="badge bg-success px-2 py-1">Active</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="badge bg-secondary px-2 py-1">@item.Status</span>
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="4" class="text-center py-5 text-muted">
+                                        <h6 class="fw-normal mb-3">You haven't booked any rooms yet.</h6>
+                                        <a href="@Url.Action("Index", "Room")" class="btn btn-outline-primary px-4">Browse Available Rooms</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

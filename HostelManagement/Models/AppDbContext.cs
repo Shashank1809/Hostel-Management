@@ -17,6 +17,6 @@ namespace HostelManagement.Models
         public DbSet<User> Users { get; set; }
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Booking> Bookings { get; set; }
-        // public DbSet<RentPayment> RentPayments { get; set; } // Add when implementing Rent module
+         public DbSet<Rent> Rents { get; set; }
     }
 }

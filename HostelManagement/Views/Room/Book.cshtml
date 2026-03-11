@@ -21,10 +21,14 @@
 
                     <p class="text-muted small mb-4">By clicking confirm, this room will be marked as occupied and assigned to your account. Your first month's rent will be due immediately.</p>
 
-                    <form action="@Url.Action("Book", "Room", new { id = Model.RoomId })" method="post">
+                    @*<form action="@Url.Action("Book", "Room", new { id = Model.RoomId })" method="post">
                         <a href="@Url.Action("Index", "Room")" class="btn btn-outline-secondary px-4 me-2">Cancel</a>
                         <button type="submit" class="btn btn-success px-4">Confirm & Book</button>
-                    </form>
+                    </form>*@
+                    <div class="d-flex justify-content-center mt-4">
+                        <a href="@Url.Action("Index", "Room")" class="btn btn-outline-secondary px-4 me-2">Cancel</a>
+                        <a href="@Url.Action("Payment", "Room", new { id = Model.RoomId })" class="btn btn-success px-4">Proceed to Payment</a>
+                    </div>
                 </div>
             </div>
         </div>

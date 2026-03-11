@@ -126,50 +126,115 @@ namespace HostelManagement.Controllers
             return View(room);
         }
 
-        // POST: Room/Book/5 (Process the booking)
-        [HttpPost, ActionName("Book")]
-        public ActionResult BookConfirmed(int id)
+        //// POST: Room/Book/5 (Process the booking)
+        //[HttpPost, ActionName("Book")]
+        //public ActionResult BookConfirmed(int id)
+        //{
+        //    // 1. Security Check
+        //    if (Session["UserRole"] == null || Session["UserRole"].ToString() != "Student")
+        //    {
+        //        return RedirectToAction("Login", "Account");
+        //    }
+
+        //    // 2. Get the logged-in Student's ID
+        //    if (Session["UserId"] == null)
+        //    {
+        //        return RedirectToAction("Login", "Account"); // Force login if session dropped
+        //    }
+
+        //    int currentStudentId = Convert.ToInt32(Session["UserId"]);
+
+        //    var room = db.Rooms.Find(id);
+
+        //    if (room != null && room.IsAvailable)
+        //    {
+        //        // 3. Mark the room as occupied
+        //        room.IsAvailable = false;
+        //        db.Entry(room).State = System.Data.Entity.EntityState.Modified;
+
+        //        // 4. Create the new Booking record
+        //        var newBooking = new HostelManagement.Models.Booking
+        //        {
+        //            RoomId = room.RoomId,          // The room being booked
+        //            UserId = currentStudentId,     // The student booking it
+        //            BookingDate = System.DateTime.Now,
+        //            Status = "Active"              // Or whatever status columns your model uses
+        //        };
+
+        //        // Add it to the Bookings table
+        //        db.Bookings.Add(newBooking);
+
+        //        // 5. Save EVERYTHING to the database at once
+        //        db.SaveChanges();
+        //    }
+
+        //    // Send the student back to the room list
+        //    return RedirectToAction("Index");
+        //}
+
+        // GET: Room/Payment/5 (Show the dummy credit card form)
+        public ActionResult Payment(int? id)
         {
-            // 1. Security Check
             if (Session["UserRole"] == null || Session["UserRole"].ToString() != "Student")
             {
                 return RedirectToAction("Login", "Account");
             }
 
-            // 2. Get the logged-in Student's ID
-            if (Session["UserId"] == null)
+            if (id == null) return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+
+            var room = db.Rooms.Find(id);
+            if (room == null || !room.IsAvailable) return HttpNotFound();
+
+            return View(room);
+        }
+
+        // POST: Room/Payment/5 (Process the dummy payment, finalize booking, and log rent)
+        [HttpPost, ActionName("Payment")]
+        public ActionResult ProcessPayment(int id)
+        {
+            if (Session["UserRole"] == null || Session["UserRole"].ToString() != "Student")
             {
-                return RedirectToAction("Login", "Account"); // Force login if session dropped
+                return RedirectToAction("Login", "Account");
             }
 
             int currentStudentId = Convert.ToInt32(Session["UserId"]);
-
             var room = db.Rooms.Find(id);
 
             if (room != null && room.IsAvailable)
             {
-                // 3. Mark the room as occupied
+                // 1. Mark the room as occupied
                 room.IsAvailable = false;
                 db.Entry(room).State = System.Data.Entity.EntityState.Modified;
 
-                // 4. Create the new Booking record
+                // 2. Create the new Booking record
                 var newBooking = new HostelManagement.Models.Booking
                 {
-                    RoomId = room.RoomId,          // The room being booked
-                    UserId = currentStudentId,     // The student booking it
+                    RoomId = room.RoomId,
+                    UserId = currentStudentId,
                     BookingDate = System.DateTime.Now,
-                    Status = "Active"              // Or whatever status columns your model uses
+                    Status = "Active"
                 };
-
-                // Add it to the Bookings table
                 db.Bookings.Add(newBooking);
 
-                // 5. Save EVERYTHING to the database at once
+                // 3. LOG THE FIRST RENT PAYMENT (NEW CODE)
+                var firstMonthRent = new HostelManagement.Models.Rent
+                {
+                    UserId = currentStudentId,
+                    RoomId = room.RoomId,
+                    // Automatically generates strings like "March 2026"
+                    RentMonth = System.DateTime.Now.ToString("MMMM yyyy"),
+                    Amount = room.MonthlyRent,
+                    DueDate = System.DateTime.Now,
+                    Status = "Paid" // Marked as paid because they just used the checkout form
+                };
+                db.Rents.Add(firstMonthRent);
+
+                // 4. Save the room update, the new booking, and the new rent all at once!
                 db.SaveChanges();
             }
 
-            // Send the student back to the room list
-            return RedirectToAction("Index");
+            // Redirect the student directly to their Dashboard
+            return RedirectToAction("Student", "Dashboard");
         }
     }
 }

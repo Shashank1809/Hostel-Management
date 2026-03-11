@@ -1,0 +1,48 @@
+﻿@model HostelManagement.Models.Room
+@{
+    ViewBag.Title = "Secure Checkout";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+            <div class="card shadow-lg border-0 rounded-3">
+                <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center py-3">
+                    <h5 class="mb-0">💳 Secure Checkout</h5>
+                    <span class="fs-5 fw-bold">$@Model.MonthlyRent</span>
+                </div>
+                <div class="card-body p-4 bg-light">
+                    <p class="text-muted mb-4 text-center">First month's rent for the <strong>@Model.RoomType</strong> room.</p>
+
+                    <form action="@Url.Action("Payment", "Room", new { id = Model.RoomId })" method="post">
+                        <div class="mb-3">
+                            <label class="form-label fw-bold text-secondary small text-uppercase">Name on Card</label>
+                            <input type="text" class="form-control form-control-lg" placeholder="John Doe" required />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold text-secondary small text-uppercase">Card Number</label>
+                            <input type="text" class="form-control form-control-lg" placeholder="XXXX XXXX XXXX XXXX" maxlength="19" required />
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-6">
+                                <label class="form-label fw-bold text-secondary small text-uppercase">Expiry Date</label>
+                                <input type="text" class="form-control form-control-lg" placeholder="MM/YY" maxlength="5" required />
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label fw-bold text-secondary small text-uppercase">CVV</label>
+                                <input type="password" class="form-control form-control-lg" placeholder="***" maxlength="3" required />
+                            </div>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-success btn-lg fw-bold">Pay $@Model.MonthlyRent & Book Room</button>
+                            <a href="@Url.Action("Book", "Room", new { id = Model.RoomId })" class="btn btn-link text-muted text-decoration-none mt-2">← Back to Room Details</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
