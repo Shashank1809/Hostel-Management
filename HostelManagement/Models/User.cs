@@ -26,11 +26,11 @@ namespace HostelManagement.Models
         [Required]
         public string Password { get; set; }
 
-        public string DisplayName { get; set; }
+        //public string DisplayName { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string Nickname { get; set; }
-        public string Website { get; set; }
-        public string Bio { get; set; }
+        //public string Nickname { get; set; }
+        //public string Website { get; set; }
+        //public string Bio { get; set; }
     }
 }
